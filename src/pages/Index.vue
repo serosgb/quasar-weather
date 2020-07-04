@@ -31,6 +31,10 @@
         </span>
       </div>
     </div>
+    <div class="col text-center">
+      <img src="https://www.fillmurray.com/100/100" alt="Bill">
+    </div>
+    <div class="col skyline"></div>
   </q-page>
 </template>
 
@@ -50,4 +54,9 @@ export default {
     background: linear-gradient(to bottom, #267871, #136a8a)
   .degree
     top: -44px
+  .skyline
+    flex: 0 0 100px
+    background: url(../statics/skyline.png)
+    background-size: contain
+    backgroung-position: center bottom
 </style>
