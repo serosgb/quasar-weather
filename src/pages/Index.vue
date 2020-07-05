@@ -9,7 +9,9 @@
         >
 
         <template v-slot:before>
-          <q-icon name="my_location" />
+          <q-icon
+            @click="getLocation"
+            name="my_location" />
         </template>
 
         <template v-slot:append>
@@ -41,7 +43,7 @@
         <div class="col text-h2 text-weight-thin">
           Quasar<br>Weather
         </div>
-        <q-btn color="col" flat>
+        <q-btn @click="getLocation" color="col" flat>
           <q-icon left size="3em" name="my_location" />
           <div>Find my location</div>
         </q-btn>
@@ -58,7 +60,19 @@ export default {
   data() {
     return {
       search: '',
-      weatherData: null
+      weatherData: null,
+      lat: null,
+      lon: null
+    }
+  },
+  methods: {
+    getLocation() {
+      console.log('Get location')
+      navigator.geolocation.getCurrentPosition(position => {
+        console.log('position: ', position)
+        this.lat = position.coords.latitude
+        this.lon = position.coords.longitude
+      })
     }
   }
 }
