@@ -62,7 +62,9 @@ export default {
       search: '',
       weatherData: null,
       lat: null,
-      lon: null
+      lon: null,
+      apiUrl: 'https://api.openweathermap.org/data/2.5/weather',
+      apiKey: '#####'
     }
   },
   methods: {
@@ -72,6 +74,13 @@ export default {
         console.log('position: ', position)
         this.lat = position.coords.latitude
         this.lon = position.coords.longitude
+        this.getWeatherByCoords()
+      })
+    },
+    getWeatherByCoords() {
+      this.$axios(`${ this.apiUrl }?lat=${ this.lat }&lon=${ this.lon }&appid=${ this.apiKey }&units=metric`).then(response => {
+        console.log('response: ', response)
+        this.weatherData = response.data
       })
     }
   }
