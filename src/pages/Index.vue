@@ -3,6 +3,7 @@
     <div class="col q-pt-lg q-px-md">
       <q-input
         v-model="search"
+        @keyup.enter="getWeatherBySearch"
         placeholder="Search"
         dark
         borderless
@@ -15,7 +16,12 @@
         </template>
 
         <template v-slot:append>
-          <q-btn round dense flat icon="search" />
+          <q-btn
+            @click="getWeatherBySearch"
+            round
+            dense
+            flat
+            icon="search" />
         </template>
       </q-input>
     </div>
@@ -79,6 +85,12 @@ export default {
     },
     getWeatherByCoords() {
       this.$axios(`${ this.apiUrl }?lat=${ this.lat }&lon=${ this.lon }&appid=${ this.apiKey }&units=metric`).then(response => {
+        console.log('response: ', response)
+        this.weatherData = response.data
+      })
+    },
+    getWeatherBySearch() {
+      this.$axios(`${ this.apiUrl }?q=${ this.search }&appid=${ this.apiKey }&units=metric`).then(response => {
         console.log('response: ', response)
         this.weatherData = response.data
       })
